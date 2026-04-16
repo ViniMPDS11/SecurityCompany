@@ -1,3 +1,5 @@
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+
 const services = [
   {
     title: 'CONTROLE DE ACESSO',
@@ -34,26 +36,88 @@ const ShieldIcon = () => (
   </svg>
 );
 
-function App() {
+function Header() {
   return (
-    <div>
-      <header className="topbar">
-        <div className="container nav-wrap">
-          <div className="brand">SENTINEL</div>
-          <nav className="menu">
-            <a href="#" className="active">
-              INÍCIO
-            </a>
-            <a href="#servicos">SERVIÇOS</a>
-            <a href="#">SOBRE</a>
-            <a href="#">CONTATO</a>
-          </nav>
-          <a href="#" className="btn btn-dark small">
-            SOLICITAR ORÇAMENTO
-          </a>
-        </div>
-      </header>
+    <header className="topbar">
+      <div className="container nav-wrap">
+        <NavLink to="/" className="brand" aria-label="Página inicial Sentinel">
+          SENTINEL
+        </NavLink>
 
+        <nav className="menu" aria-label="Navegação principal">
+          <NavLink to="/">INÍCIO</NavLink>
+          <NavLink to="/servicos">SERVIÇOS</NavLink>
+          <NavLink to="/sobre">SOBRE</NavLink>
+          <NavLink to="/contato">CONTATO</NavLink>
+        </nav>
+
+        <NavLink to="/contato" className="btn btn-dark header-cta">
+          SOLICITAR ORÇAMENTO
+        </NavLink>
+      </div>
+    </header>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="footer">
+      <div className="container cta-row">
+        <div>
+          <h2>TEM UM EVENTO EM VISTA?</h2>
+          <p>Fale com nossa equipe e receba um orçamento personalizado.</p>
+        </div>
+        <NavLink to="/contato" className="btn btn-light">
+          SOLICITAR ORÇAMENTO <span aria-hidden="true">→</span>
+        </NavLink>
+      </div>
+
+      <div className="container footer-grid">
+        <div>
+          <h3>SENTINEL</h3>
+          <p>
+            Segurança terceirizada especializada em eventos.
+            <br />
+            Profissionalismo e discrição em cada operação.
+          </p>
+        </div>
+        <div>
+          <h4>PÁGINAS</h4>
+          <ul>
+            <li>
+              <NavLink to="/">Início</NavLink>
+            </li>
+            <li>
+              <NavLink to="/servicos">Serviços</NavLink>
+            </li>
+            <li>
+              <NavLink to="/sobre">Sobre</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contato">Contato</NavLink>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>CONTATO</h4>
+          <p>
+            contato@sentinelseg.com.br
+            <br />
+            (11) 99999-0000
+          </p>
+        </div>
+      </div>
+
+      <div className="container copyright">
+        © 2026 SENTINEL SEGURANÇA. TODOS OS DIREITOS RESERVADOS.
+      </div>
+    </footer>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
       <section className="hero">
         <div className="container hero-inner">
           <p className="eyebrow">SEGURANÇA PARA EVENTOS — TERCEIRIZADA</p>
@@ -69,17 +133,17 @@ function App() {
             corporativos, culturais, esportivos e privados em todo o Brasil.
           </p>
           <div className="hero-actions">
-            <a href="#" className="btn btn-light">
+            <NavLink to="/contato" className="btn btn-light">
               SOLICITAR ORÇAMENTO <span aria-hidden="true">→</span>
-            </a>
-            <a href="#servicos" className="btn btn-outline">
+            </NavLink>
+            <NavLink to="/servicos" className="btn btn-outline">
               VER SERVIÇOS
-            </a>
+            </NavLink>
           </div>
         </div>
       </section>
 
-      <section id="servicos" className="services">
+      <section className="services">
         <div className="container">
           <div className="services-head">
             <div>
@@ -90,9 +154,9 @@ function App() {
                 ESPECIALIZADOS
               </h2>
             </div>
-            <a href="#" className="all-link">
+            <NavLink to="/servicos" className="all-link">
               VER TODOS <span aria-hidden="true">→</span>
-            </a>
+            </NavLink>
           </div>
 
           <div className="services-grid">
@@ -109,51 +173,63 @@ function App() {
           </div>
         </div>
       </section>
+    </>
+  );
+}
 
-      <footer className="footer">
-        <div className="container cta-row">
-          <div>
-            <h2>TEM UM EVENTO EM VISTA?</h2>
-            <p>Fale com nossa equipe e receba um orçamento personalizado.</p>
-          </div>
-          <a href="#" className="btn btn-light">
-            SOLICITAR ORÇAMENTO <span aria-hidden="true">→</span>
-          </a>
-        </div>
+function InternalPage({ title, subtitle }) {
+  return (
+    <section className="page-section">
+      <div className="container page-inner">
+        <p className="eyebrow eyebrow-dark">SENTINEL</p>
+        <h1 className="page-title">{title}</h1>
+        <p className="page-text">{subtitle}</p>
+        <NavLink className="btn btn-dark" to="/contato">
+          FALAR COM A EQUIPE
+        </NavLink>
+      </div>
+    </section>
+  );
+}
 
-        <div className="container footer-grid">
-          <div>
-            <h3>SENTINEL</h3>
-            <p>
-              Segurança terceirizada especializada em eventos.
-              <br />
-              Profissionalismo e discrição em cada operação.
-            </p>
-          </div>
-          <div>
-            <h4>PÁGINAS</h4>
-            <ul>
-              <li>Início</li>
-              <li>Serviços</li>
-              <li>Sobre</li>
-              <li>Contato</li>
-            </ul>
-          </div>
-          <div>
-            <h4>CONTATO</h4>
-            <p>
-              contato@sentinelseg.com.br
-              <br />
-              (11) 99999-0000
-            </p>
-          </div>
-        </div>
-
-        <div className="container copyright">
-          © 2026 SENTINEL SEGURANÇA. TODOS OS DIREITOS RESERVADOS.
-        </div>
-      </footer>
-    </div>
+function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/servicos"
+            element={
+              <InternalPage
+                title="SERVIÇOS"
+                subtitle="Equipe preparada para controle de acesso, portaria, ronda patrimonial e proteção de áreas críticas em eventos de todos os portes."
+              />
+            }
+          />
+          <Route
+            path="/sobre"
+            element={
+              <InternalPage
+                title="SOBRE NÓS"
+                subtitle="Atuamos com foco em profissionalismo, discrição e planejamento operacional para entregar segurança confiável em cada operação."
+              />
+            }
+          />
+          <Route
+            path="/contato"
+            element={
+              <InternalPage
+                title="CONTATO"
+                subtitle="Conte os detalhes do seu evento e receba uma proposta personalizada para o seu cenário."
+              />
+            }
+          />
+        </Routes>
+      </main>
+      <SiteFooter />
+    </BrowserRouter>
   );
 }
 
